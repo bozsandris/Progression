@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item android:title="Dynamic">
+           <menu>
+        <item
+            android:id="@+id/back"
+            android:icon="@mipmap/back_fg"
+            android:title="Back" />
+        <item
+            android:id="@+id/chest"
+            android:icon="@mipmap/chest_fg"
+            android:title="Chest" />
+        <item
+            android:id="@+id/biceps"
+            android:icon="@mipmap/biceps_fg"
+            android:title="Biceps" />
+        <item
+            android:id="@+id/triceps"
+            android:icon="@mipmap/triceps_fg"
+            android:title="Triceps" />
+    </menu>
+    </item>
+
+    <item android:title="Static">
+        <menu>
+            <item
+                android:id="@+id/frontlever"
+                android:icon="@mipmap/front_fg"
+                android:title="Front lever" />
+            <item
+                android:id="@+id/planche"
+                android:icon="@mipmap/planche_fg"
+                android:title="Planche" />
+        </menu>
+    </item>
+
+</menu>
