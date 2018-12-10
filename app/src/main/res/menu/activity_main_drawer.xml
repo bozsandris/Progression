@@ -35,5 +35,13 @@
                 android:title="Planche" />
         </menu>
     </item>
+    <item android:title="Routine">
+        <menu>
+            <item
+                android:id="@+id/routine"
+                android:icon="@mipmap/front_fg"
+                android:title="Workout routine" />
+        </menu>
+    </item>
 
 </menu>
