@@ -41,6 +41,10 @@
                 android:id="@+id/routine"
                 android:icon="@mipmap/planche_fg"
                 android:title="Workout routine" />
+            <item
+                android:id="@+id/timer"
+                android:icon="@mipmap/ic_timer_foreground"
+                android:title="Timer" />
         </menu>
     </item>
 
