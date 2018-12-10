@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,12 +29,13 @@ public class Routine extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.planche);
+        setContentView(R.layout.routine);
         final Spinner spinner = findViewById(R.id.spinner);
         final EditText text = findViewById(R.id.text);
         final Button save = findViewById(R.id.button);
         final Button load = findViewById(R.id.button2);
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,spinnerlist);
+        ArrayAdapter<String> arrayAdapter= new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerlist);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -59,7 +61,7 @@ public class Routine extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                Toast.makeText(getApplicationContext(),"Progression saved!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Routine description saved!",Toast.LENGTH_SHORT).show();
             }
         });
         load.setOnClickListener(new View.OnClickListener(){
@@ -85,6 +87,38 @@ public class Routine extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                filename = spinner.getSelectedItem().toString();
+                File file = getApplicationContext().getFileStreamPath(filename);
+                if(file.exists()) {
+                    FileInputStream inputStream;
+                    String str = "";
+                    StringBuffer input=new StringBuffer();
+                    try {
+                        inputStream = openFileInput(filename);
+                        try {
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                            while ((str = reader.readLine())!=null) {
+                                input.append(str+"\n");
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        text.setText(input);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else text.setText("");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }

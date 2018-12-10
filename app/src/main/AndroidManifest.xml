@@ -49,6 +49,11 @@
             android:label="@string/app_name"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity
+            android:name=".Routine"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

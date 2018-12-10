@@ -39,7 +39,7 @@
         <menu>
             <item
                 android:id="@+id/routine"
-                android:icon="@mipmap/front_fg"
+                android:icon="@mipmap/planche_fg"
                 android:title="Workout routine" />
         </menu>
     </item>
