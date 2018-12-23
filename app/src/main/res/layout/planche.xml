@@ -144,7 +144,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Straight arm dumbbell raises"
+        android:text="Shoulder press"
         android:textSize="18sp" />
 
     <TableRow

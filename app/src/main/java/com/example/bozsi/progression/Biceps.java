@@ -42,8 +42,6 @@ public class Biceps extends AppCompatActivity {
         final Button load = findViewById(R.id.button2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                File file = new File(getApplicationContext().getFilesDir(),filename);
-                if (file.exists()) {
                     try {
                         outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                         numbers = weight.getText().toString() + " " + rep.getText().toString() + " "
@@ -55,29 +53,10 @@ public class Biceps extends AppCompatActivity {
                         outputStream.write(numbers.getBytes());
                         numbers = "";
                         outputStream.close();
+                        Toast.makeText(getApplicationContext(),"Progression saved!",Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else
-                {
-                    try {
-                        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-                        numbers = weight.getText().toString() + " " + rep.getText().toString() + " "
-                                + weight2.getText().toString() + " " + rep2.getText().toString()
-                                + " "
-                                + weight3.getText().toString() + " " + rep3.getText().toString()
-                                + " "
-                                + weight4.getText().toString() + " " + rep4.getText().toString() + " ";
-                        outputStream.write(numbers.getBytes());
-                        numbers = "";
-                        outputStream.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Toast.makeText(getApplicationContext(),"Progression saved!",Toast.LENGTH_SHORT).show();
             }
         });
         load.setOnClickListener(new View.OnClickListener(){
@@ -115,8 +94,6 @@ public class Biceps extends AppCompatActivity {
                         if(scanner.hasNext()) weight4.setText(scanner.next());
                         if(scanner.hasNext()) rep4.setText(scanner.next());
                         numbers="";
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

@@ -40,28 +40,14 @@ public class Routine extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 filename = spinner.getSelectedItem().toString();
-                File file = new File(getApplicationContext().getFilesDir(),filename);
-                if (file.exists()) {
                     try {
                         outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                         outputStream.write(text.getText().toString().getBytes());
                         outputStream.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else
-                {
-                    try {
-                        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-                        outputStream.write(text.getText().toString().getBytes());
-                        outputStream.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),"Routine description saved!",Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-                Toast.makeText(getApplicationContext(),"Routine description saved!",Toast.LENGTH_SHORT).show();
             }
         });
         load.setOnClickListener(new View.OnClickListener(){
@@ -77,7 +63,7 @@ public class Routine extends AppCompatActivity {
                         try {
                             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                             while ((str = reader.readLine())!=null) {
-                                input.append(str+"\n");
+                                input.append(str).append("\n");
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -103,7 +89,7 @@ public class Routine extends AppCompatActivity {
                         try {
                             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                             while ((str = reader.readLine())!=null) {
-                                input.append(str+"\n");
+                                input.append(str).append("\n");
                             }
                         } catch (IOException e) {
                             e.printStackTrace();

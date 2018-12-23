@@ -50,9 +50,9 @@
     <item android:title="Progression">
         <menu>
             <item
-                android:id="@+id/routine"
+                android:id="@+id/plancheprogression"
                 android:icon="@mipmap/planche_fg"
-                android:title="Workout routine" />
+                android:title="Planche progression" />
             <item
                 android:id="@+id/timer"
                 android:icon="@mipmap/ic_timer_foreground"

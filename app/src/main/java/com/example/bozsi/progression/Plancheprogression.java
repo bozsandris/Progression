@@ -2,10 +2,7 @@ package com.example.bozsi.progression;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.app.AppCompatActivity;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -13,11 +10,10 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Plancheprogression extends Fragment {
+public class Plancheprogression extends AppCompatActivity {
     private final Handler mHandler = new Handler();
     private Runnable mTimer1;
     private Runnable mTimer2;
@@ -28,29 +24,21 @@ public class Plancheprogression extends Fragment {
     String numbers = "";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.plancheprogression, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.plancheprogression);
 
-        GraphView graph = rootView.findViewById(R.id.graph);
-        mSeries1 = new LineGraphSeries<>(generateData());
+        GraphView graph = findViewById(R.id.graph);
+        mSeries1 = new LineGraphSeries<>();
         graph.addSeries(mSeries1);
 
-        GraphView graph2 = rootView.findViewById(R.id.graph2);
+        GraphView graph2 = findViewById(R.id.graph2);
         mSeries2 = new LineGraphSeries<>();
         graph2.addSeries(mSeries2);
         graph2.getViewport().setXAxisBoundsManual(true);
         graph2.getViewport().setMinX(0);
         graph2.getViewport().setMaxX(40);
-        return rootView;
     }
-
-    /*@Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(MainActivity.ARG_SECTION_NUMBER));
-    }*/
 
     @Override
     public void onResume() {
@@ -58,7 +46,7 @@ public class Plancheprogression extends Fragment {
         mTimer1 = new Runnable() {
             @Override
             public void run() {
-                mSeries1.resetData(generateData());
+                mSeries1=mSeries2;
                 mHandler.postDelayed(this, 300);
             }
         };
@@ -68,7 +56,7 @@ public class Plancheprogression extends Fragment {
             @Override
             public void run() {
                 graph2LastXValue += 1d;
-                File file = getContext().getFileStreamPath(filename);
+                File file = getApplicationContext().getFileStreamPath(filename);
                 if(file.exists()) {
                     FileInputStream inputStream;
                     int n;
@@ -83,9 +71,9 @@ public class Plancheprogression extends Fragment {
                         }
                         inputStream.close();
                         Scanner scanner = new Scanner(numbers).useDelimiter(" ");
-                        if(scanner.hasNext()) mSeries2.appendData(new DataPoint(graph2LastXValue,Double.parseDouble(scanner.next())),true,10);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        for(int i=0;i<10;i++){
+                        if(scanner.hasNext()) {mSeries2.appendData(new DataPoint(graph2LastXValue,Double.parseDouble(scanner.next())),true,10);graph2LastXValue++;}
+                        else{mSeries2.appendData(new DataPoint(graph2LastXValue,0),true,10);graph2LastXValue++;}}
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -101,18 +89,5 @@ public class Plancheprogression extends Fragment {
         mHandler.removeCallbacks(mTimer1);
         mHandler.removeCallbacks(mTimer2);
         super.onPause();
-    }
-
-    private DataPoint[] generateData() {
-        int count = 30;
-        DataPoint[] values = new DataPoint[count];
-        double y = 0;
-        for (int i=0; i<count; i++) {
-            double x = i;
-            y++;
-            DataPoint v = new DataPoint(x, y);
-            values[i] = v;
-        }
-        return values;
     }
 }

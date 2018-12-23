@@ -21,9 +21,9 @@ import java.util.Scanner;
 
 public class Planche extends AppCompatActivity {
 
-    String filename = "planche.txt";
-    String numbers = "";
-    FileOutputStream outputStream;
+    String filename = "planche.txt",filename2 = "shoulderpress.txt";
+    String numbers = "",numbers2="";
+    FileOutputStream outputStream,outputStream2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,6 @@ public class Planche extends AppCompatActivity {
         final Button load = findViewById(R.id.button2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                File file = new File(getApplicationContext().getFilesDir(),filename);
-                if (file.exists()) {
                     try {
                         outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                         numbers = weight.getText().toString() + " " + rep.getText().toString() + " "
@@ -60,33 +58,26 @@ public class Planche extends AppCompatActivity {
                         outputStream.write(numbers.getBytes());
                         numbers = "";
                         outputStream.close();
+                        FileInputStream inputStream = openFileInput(filename);
+                        int n;
+                        try {
+                            while ((n = inputStream.read()) != -1) {
+                                numbers2 += (char)n;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        inputStream.close();
+                        outputStream2 = openFileOutput(filename2, Context.MODE_PRIVATE);
+                        numbers2 += weight5.getText().toString() + " " + rep5.getText().toString() + " ";
+                        outputStream.write(numbers2.getBytes());
+                        numbers2 = "";
+                        outputStream.close();
+                        Toast.makeText(getApplicationContext(),"Progression saved!",Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else
-                {
-                    try {
-                        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-                        numbers = weight.getText().toString() + " " + rep.getText().toString() + " "
-                                + weight2.getText().toString() + " " + rep2.getText().toString()
-                                + " "
-                                + weight3.getText().toString() + " " + rep3.getText().toString()
-                                + " "
-                                + weight4.getText().toString() + " " + rep4.getText().toString()
-                                + " "
-                                + weight5.getText().toString() + " " + rep5.getText().toString() + " "
-                                + rep6.getText().toString() + " ";
-                        outputStream.write(numbers.getBytes());
-                        numbers = "";
-                        outputStream.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
-                Toast.makeText(getApplicationContext(),"Progression saved!",Toast.LENGTH_SHORT).show();
-            }
         });
         load.setOnClickListener(new View.OnClickListener(){
             public void  onClick(View v){
@@ -128,8 +119,6 @@ public class Planche extends AppCompatActivity {
                             if(scanner.hasNext()) rep5.setText(scanner.next());
                             if(scanner.hasNext()) rep6.setText(scanner.next());
                             numbers="";
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
