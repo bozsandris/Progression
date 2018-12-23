@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
@@ -45,6 +44,7 @@ public class Planche extends AppCompatActivity {
         final Button load = findViewById(R.id.button2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                File file = new File(getApplicationContext().getFilesDir(),filename2);
                     try {
                         outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                         numbers = weight.getText().toString() + " " + rep.getText().toString() + " "
@@ -58,16 +58,18 @@ public class Planche extends AppCompatActivity {
                         outputStream.write(numbers.getBytes());
                         numbers = "";
                         outputStream.close();
-                        FileInputStream inputStream = openFileInput(filename2);
-                        int n;
-                        try {
-                            while ((n = inputStream.read()) != -1) {
-                                numbers2 += (char)n;
+                        if(file.exists()){
+                            FileInputStream inputStream = openFileInput(filename2);
+                            int n;
+                            try {
+                                while ((n = inputStream.read()) != -1) {
+                                  numbers2 += (char)n;
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            inputStream.close();
                         }
-                        inputStream.close();
                         outputStream2 = openFileOutput(filename2, Context.MODE_PRIVATE);
                         if(numbers2.length()>=20) numbers2="";
                         numbers2 += weight5.getText().toString() + " ";
