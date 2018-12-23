@@ -1,20 +1,24 @@
 package com.example.bozsi.progression;
 
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Timer extends AppCompatActivity {
 
     TextView timerTextView;
     ProgressBar progressBar;
     long startTime = 0;
+    long millis;
+    int beforeminutes;
+    private Vibrator myVib;
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -22,9 +26,11 @@ public class Timer extends AppCompatActivity {
 
         @Override
         public void run() {
-            long millis = System.currentTimeMillis() - startTime;
+            millis = System.currentTimeMillis() - startTime;
             int seconds = (int) (millis / 1000);
             int minutes = seconds / 60;
+            if(minutes>beforeminutes) myVib.vibrate(50);
+            beforeminutes = minutes;
             seconds = seconds % 60;
             progressBar.setSecondaryProgress(seconds);
             timerTextView.setText(String.format("%d:%02d", minutes, seconds));
@@ -37,11 +43,13 @@ public class Timer extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timer);
-
+        myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
         timerTextView = findViewById(R.id.timerTextView);
         progressBar = findViewById(R.id.progressBar);
-        Button b = findViewById(R.id.button);
+        final Button b = findViewById(R.id.button);
+        final Button reset = findViewById(R.id.button3);
         b.setText("start");
+        b.setBackgroundColor(Color.GREEN);
         b.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -50,10 +58,34 @@ public class Timer extends AppCompatActivity {
                 if (b.getText().equals("stop")) {
                     timerHandler.removeCallbacks(timerRunnable);
                     b.setText("start");
+                    b.setBackgroundColor(Color.GREEN);
                 } else {
-                    startTime = System.currentTimeMillis();
-                    timerHandler.postDelayed(timerRunnable, 0);
+                    if(startTime==0) startTime = System.currentTimeMillis();
+                    else startTime = System.currentTimeMillis()-millis;
+                    timerHandler.postDelayed(timerRunnable, 500);
+                    b.setBackgroundColor(Color.BLUE);
+                    reset.setError(null);
                     b.setText("stop");
+                }
+            }
+        });
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button reset = (Button) v;
+                if(startTime==0){
+                    reset.setError("There's nothing to reset!");return;
+                }
+                if (b.getText().equals("start")) {
+                    startTime = 0;
+                    myVib.vibrate(50);
+                }
+                else if (b.getText().equals("stop")) {
+                    timerHandler.removeCallbacks(timerRunnable);
+                    b.setText("start");
+                    b.setBackgroundColor(Color.GREEN);
+                    myVib.vibrate(50);
+                    startTime = 0;
                 }
             }
         });
@@ -65,6 +97,7 @@ public class Timer extends AppCompatActivity {
         timerHandler.removeCallbacks(timerRunnable);
         Button b = findViewById(R.id.button);
         b.setText("start");
+        b.setBackgroundColor(Color.GREEN);
     }
 
 }
