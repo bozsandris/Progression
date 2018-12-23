@@ -3,6 +3,7 @@ package com.example.bozsi.progression;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,7 +30,7 @@ public class Timer extends AppCompatActivity {
             millis = System.currentTimeMillis() - startTime;
             int seconds = (int) (millis / 1000);
             int minutes = seconds / 60;
-            if(minutes>beforeminutes) myVib.vibrate(50);
+            if(minutes>beforeminutes) myVib.vibrate(VibrationEffect.createOneShot(50,1));
             beforeminutes = minutes;
             seconds = seconds % 60;
             progressBar.setSecondaryProgress(seconds);
@@ -78,13 +79,13 @@ public class Timer extends AppCompatActivity {
                 }
                 if (b.getText().equals("start")) {
                     startTime = 0;
-                    myVib.vibrate(50);
+                    myVib.vibrate(VibrationEffect.createOneShot(50,1));
                 }
                 else if (b.getText().equals("stop")) {
                     timerHandler.removeCallbacks(timerRunnable);
                     b.setText("start");
                     b.setBackgroundColor(Color.GREEN);
-                    myVib.vibrate(50);
+                    myVib.vibrate(VibrationEffect.createOneShot(50,1));
                     startTime = 0;
                 }
             }

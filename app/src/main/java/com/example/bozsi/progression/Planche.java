@@ -58,7 +58,7 @@ public class Planche extends AppCompatActivity {
                         outputStream.write(numbers.getBytes());
                         numbers = "";
                         outputStream.close();
-                        FileInputStream inputStream = openFileInput(filename);
+                        FileInputStream inputStream = openFileInput(filename2);
                         int n;
                         try {
                             while ((n = inputStream.read()) != -1) {
@@ -69,10 +69,11 @@ public class Planche extends AppCompatActivity {
                         }
                         inputStream.close();
                         outputStream2 = openFileOutput(filename2, Context.MODE_PRIVATE);
-                        numbers2 += weight5.getText().toString() + " " + rep5.getText().toString() + " ";
-                        outputStream.write(numbers2.getBytes());
+                        if(numbers2.length()>=20) numbers2="";
+                        numbers2 += weight5.getText().toString() + " ";
+                        outputStream2.write(numbers2.getBytes());
                         numbers2 = "";
-                        outputStream.close();
+                        outputStream2.close();
                         Toast.makeText(getApplicationContext(),"Progression saved!",Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
