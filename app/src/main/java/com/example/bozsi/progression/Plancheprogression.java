@@ -59,6 +59,7 @@ public class Plancheprogression extends AppCompatActivity {
         graph2.getViewport().setMinX(0);
         graph2.getViewport().setMaxX(10);
         graph2.getViewport().setMinY(40);
+        graph2.getViewport().setMinY(80);
         graph2.getGridLabelRenderer().setVerticalAxisTitle("Weight in Kg");
         graph2.getGridLabelRenderer().setHorizontalAxisTitle("Last 10 session");
         scanner = new Scanner(getoutput()).useDelimiter(" ");
@@ -94,6 +95,8 @@ public class Plancheprogression extends AppCompatActivity {
     @Override
     public void onPause() {
         mHandler.removeCallbacks(mTimer1);
+        graph2LastXValue=0;
+        progressions = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         super.onPause();
     }
 }
