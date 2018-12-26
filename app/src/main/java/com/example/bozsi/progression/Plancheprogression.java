@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -46,11 +45,19 @@ public class Plancheprogression extends AppCompatActivity {
         return numbers;
     }
 
+    private void reset(){
+        graph2LastXValue=0;
+        graph2.removeAllSeries();
+        mSeries2 = new LineGraphSeries<>();
+        mSeries2.setDrawBackground(true);
+        graph2.addSeries(mSeries2);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plancheprogression);
-
+        numbers = "";
         graph2 = findViewById(R.id.graph2);
         mSeries2 = new LineGraphSeries<>();
         mSeries2.setDrawBackground(true);
@@ -59,24 +66,24 @@ public class Plancheprogression extends AppCompatActivity {
         graph2.getViewport().setMinX(0);
         graph2.getViewport().setMaxX(10);
         graph2.getViewport().setMinY(40);
-        graph2.getViewport().setMinY(80);
         graph2.getGridLabelRenderer().setVerticalAxisTitle("Weight in Kg");
         graph2.getGridLabelRenderer().setHorizontalAxisTitle("Last 10 session");
         scanner = new Scanner(getoutput()).useDelimiter(" ");
         for(int i=0;i<10;i++) {
             if (scanner.hasNext()) {
-                progressions[i] = Double.parseDouble(scanner.next());
+                progressions[i] = scanner.nextDouble();
             } else {
                 if(i>0) progressions[i] = progressions[i-1];
                 else progressions[i] = 0.0;
             }
         }
+        scanner.close();
     }
 
     private void addEntry() {
-        if(graph2LastXValue>9) {graph2LastXValue=0;graph2.removeAllSeries();mSeries2 = new LineGraphSeries<>();mSeries2.setDrawBackground(true);graph2.addSeries(mSeries2);}
         mSeries2.appendData(new DataPoint(graph2LastXValue, progressions[(int)graph2LastXValue]), false, 10);
         graph2LastXValue++;
+        if(graph2LastXValue>9) reset();
     }
 
     @Override
@@ -95,8 +102,6 @@ public class Plancheprogression extends AppCompatActivity {
     @Override
     public void onPause() {
         mHandler.removeCallbacks(mTimer1);
-        graph2LastXValue=0;
-        progressions = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         super.onPause();
     }
 }
