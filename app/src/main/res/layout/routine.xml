@@ -12,12 +12,12 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="390dp">
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/text"
             android:layout_width="match_parent"
-            android:layout_height="382dp"
+            android:layout_height="369dp"
             android:ems="10"
             android:hint="Routine description"
             android:inputType="textMultiLine"
@@ -29,12 +29,16 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/loadbuttonstyle"
         android:text="Load" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/loadbuttonstyle"
+        android:layout_margin="5dp"
         android:text="Save" />
 
 </LinearLayout>

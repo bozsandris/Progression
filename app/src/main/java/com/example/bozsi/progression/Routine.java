@@ -22,7 +22,6 @@ import java.io.InputStreamReader;
 public class Routine extends AppCompatActivity {
     String[] spinnerlist ={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     String filename = "";
-    String outputtext="";
     FileOutputStream outputStream;
 
     @Override
