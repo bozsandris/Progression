@@ -30,6 +30,7 @@ public class Routine extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.routine);
+        this.overridePendingTransition(R.anim.righttoleft,R.anim.stayincenter);
         final Spinner spinner = findViewById(R.id.spinner);
         final EditText text = findViewById(R.id.text);
         final Button save = findViewById(R.id.button);

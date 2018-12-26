@@ -56,6 +56,7 @@ public class Plancheprogression extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.overridePendingTransition(R.anim.righttoleft,R.anim.stayincenter);
         setContentView(R.layout.plancheprogression);
         numbers = "";
         graph2 = findViewById(R.id.graph2);
@@ -65,7 +66,6 @@ public class Plancheprogression extends AppCompatActivity {
         graph2.getViewport().setXAxisBoundsManual(true);
         graph2.getViewport().setMinX(0);
         graph2.getViewport().setMaxX(10);
-        graph2.getViewport().setMinY(40);
         graph2.getGridLabelRenderer().setVerticalAxisTitle("Weight in Kg");
         graph2.getGridLabelRenderer().setHorizontalAxisTitle("Last 10 session");
         scanner = new Scanner(getoutput()).useDelimiter(" ");
@@ -81,9 +81,10 @@ public class Plancheprogression extends AppCompatActivity {
     }
 
     private void addEntry() {
+        if(graph2LastXValue>=10) reset();
         mSeries2.appendData(new DataPoint(graph2LastXValue, progressions[(int)graph2LastXValue]), false, 10);
         graph2LastXValue++;
-        if(graph2LastXValue>9) reset();
+
     }
 
     @Override

@@ -29,6 +29,7 @@ public class Planche extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.planche);
+        this.overridePendingTransition(R.anim.righttoleft,R.anim.stayincenter);
         final EditText weight = findViewById(R.id.weight);
         final EditText rep = findViewById(R.id.rep);
         final EditText weight2 =  findViewById(R.id.weight2);

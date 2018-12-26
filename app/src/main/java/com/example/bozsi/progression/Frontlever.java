@@ -30,6 +30,7 @@ public class Frontlever extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frontlever);
+        this.overridePendingTransition(R.anim.righttoleft,R.anim.stayincenter);
         final EditText weight = findViewById(R.id.weight);
         final EditText rep = findViewById(R.id.rep);
         final EditText weight2 =  findViewById(R.id.weight2);

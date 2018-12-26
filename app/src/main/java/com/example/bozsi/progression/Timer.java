@@ -43,6 +43,7 @@ public class Timer extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timer);
+        this.overridePendingTransition(R.anim.righttoleft,R.anim.stayincenter);
         myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
         timerTextView = findViewById(R.id.timerTextView);
         progressBar = findViewById(R.id.progressBar);
