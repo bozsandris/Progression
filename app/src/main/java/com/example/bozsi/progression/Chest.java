@@ -1,11 +1,14 @@
 package com.example.bozsi.progression;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.io.File;
@@ -42,6 +45,7 @@ public class Chest  extends AppCompatActivity {
         final EditText rep5 = findViewById(R.id.rep5);
         final Button save = findViewById(R.id.button);
         final Button load = findViewById(R.id.button2);
+        final Switch change = findViewById(R.id.switch2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                     try {
@@ -65,7 +69,6 @@ public class Chest  extends AppCompatActivity {
         });
         load.setOnClickListener(new View.OnClickListener(){
             public void  onClick(View v){
-                weight.setText("0");
                 weight.setText("0");
                 rep.setText("0");
                 weight2.setText("0");
@@ -105,6 +108,14 @@ public class Chest  extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
+            }
+        });
+        change.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                { Intent intent = new Intent(getApplicationContext(),PowerDip.class);
+                    startActivity(intent);
                 }
             }
         });

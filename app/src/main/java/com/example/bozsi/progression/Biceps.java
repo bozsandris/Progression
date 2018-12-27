@@ -62,7 +62,6 @@ public class Biceps extends AppCompatActivity {
         load.setOnClickListener(new View.OnClickListener(){
             public void  onClick(View v){
                 weight.setText("0");
-                weight.setText("0");
                 rep.setText("0");
                 weight2.setText("0");
                 rep2.setText("0");

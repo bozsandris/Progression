@@ -2,50 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
 
         <Switch
-            android:id="@+id/switch2"
+            android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:checked="false"
+            android:checked="true"
             android:showText="true"
             android:textAlignment="center"
             android:textOff="Max"
             android:textOn="Power"
             android:textSize="24sp"
             android:thumbTextPadding="10dp"
-            tools:checked="false" />
-
-    <TextView
-        android:id="@+id/exercise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="18sp"
-        android:gravity="center_horizontal"
-        android:inputType="textPersonName"
-        android:text="Exercise / Type or Weight / Reps" />
+            android:textColor="#FF0000" />
 
     <TextView
         android:id="@+id/editText4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="18sp"
         android:inputType="textPersonName"
-        android:text="Hold" />
+        android:text="First"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TableRow
         android:layout_width="match_parent"
@@ -56,15 +47,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="type"
-            android:inputType="text" />
+            android:hint="weight"
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/rep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="time (sec)"
+            android:hint="repetition"
             android:inputType="number" />
 
     </TableRow>
@@ -74,9 +65,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="18sp"
         android:inputType="textPersonName"
-        android:text="Assisted Hold" />
+        android:text="Second"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TableRow
         android:layout_width="match_parent"
@@ -87,15 +79,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="type"
-            android:inputType="text" />
+            android:hint="weight"
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/rep2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="time (sec)"
+            android:hint="repetition"
             android:inputType="number" />
 
     </TableRow>
@@ -106,7 +98,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Pike push up"
+        android:text="Third"
+        android:textAlignment="center"
         android:textSize="18sp" />
 
     <TableRow
@@ -118,8 +111,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="type"
-            android:inputType="text" />
+            android:hint="weight"
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/rep3"
@@ -132,13 +125,14 @@
     </TableRow>
 
     <TextView
-        android:id="@+id/editText"
+        android:id="@+id/editText5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="18sp"
         android:inputType="textPersonName"
-        android:text="Handstand push up" />
+        android:text="Fourth"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TableRow
         android:layout_width="match_parent"
@@ -163,12 +157,13 @@
     </TableRow>
 
     <TextView
-        android:id="@+id/editText2"
+        android:id="@+id/editText8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Shoulder press"
+        android:text="Fifth"
+        android:textAlignment="center"
         android:textSize="18sp" />
 
     <TableRow
@@ -193,45 +188,22 @@
 
     </TableRow>
 
-    <TextView
-        android:id="@+id/editText3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Pseudo push up"
-        android:textSize="18sp" />
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <EditText
-            android:id="@+id/rep6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="repetition"
-            android:inputType="number" />
-
-    </TableRow>
-
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/loadbuttonstyle"
         android:layout_margin="5dp"
+        android:background="@drawable/loadbuttonstyle"
         android:text="Load" />
 
     <Button
         android:id="@+id/button"
+        android:background="@drawable/loadbuttonstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/loadbuttonstyle"
         android:layout_margin="5dp"
         android:text="Save" />
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

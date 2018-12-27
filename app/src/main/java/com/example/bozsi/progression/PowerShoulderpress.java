@@ -17,22 +17,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static com.example.bozsi.progression.R.anim.righttoleft;
+
 /**
  * Created by bozsi on 10/31/2018.
  */
 
-public class Planche extends AppCompatActivity {
+public class PowerShoulderpress extends AppCompatActivity {
 
-    String filename = "planche.txt",filename2 = "shoulderpress.txt";
-    String numbers = "",numbers2="";
-    FileOutputStream outputStream,outputStream2;
+    String filename = "powershoulderpress.txt";
+    String numbers = "";
+    FileOutputStream outputStream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.planche);
-        this.overridePendingTransition(R.anim.righttoleft,R.anim.stayincenter);
+        setContentView(R.layout.powershouldpress);
+        this.overridePendingTransition(righttoleft,R.anim.stayincenter);
         final EditText weight = findViewById(R.id.weight);
         final EditText rep = findViewById(R.id.rep);
         final EditText weight2 =  findViewById(R.id.weight2);
@@ -43,13 +45,11 @@ public class Planche extends AppCompatActivity {
         final EditText rep4 = findViewById(R.id.rep4);
         final EditText weight5 = findViewById(R.id.weight5);
         final EditText rep5 = findViewById(R.id.rep5);
-        final EditText rep6 = findViewById(R.id.rep6);
+        final Switch change = findViewById(R.id.switch1);
         final Button save = findViewById(R.id.button);
         final Button load = findViewById(R.id.button2);
-        final Switch change = findViewById(R.id.switch2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                File file = new File(getApplicationContext().getFilesDir(),filename2);
                     try {
                         outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                         numbers = weight.getText().toString() + " " + rep.getText().toString() + " "
@@ -57,41 +57,23 @@ public class Planche extends AppCompatActivity {
                                 + " "
                                 + weight3.getText().toString() + " " + rep3.getText().toString()
                                 + " "
-                                + weight4.getText().toString() + " " + rep4.getText().toString() + " "
-                                + weight5.getText().toString() + " " + rep5.getText().toString() + " "
-                                + rep6.getText().toString() + " ";
+                                + weight4.getText().toString() + " " + rep4.getText().toString()
+                                + " "
+                                + weight5.getText().toString() + " " + rep5.getText().toString() + " ";
                         outputStream.write(numbers.getBytes());
                         numbers = "";
                         outputStream.close();
-                        if(file.exists()){
-                            FileInputStream inputStream = openFileInput(filename2);
-                            int n;
-                            try {
-                                while ((n = inputStream.read()) != -1) {
-                                  numbers2 += (char)n;
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            inputStream.close();
-                        }
-                        outputStream2 = openFileOutput(filename2, Context.MODE_PRIVATE);
-                        if(numbers2.length()>=20) numbers2="";
-                        numbers2 += weight5.getText().toString() + " ";
-                        outputStream2.write(numbers2.getBytes());
-                        numbers2 = "";
-                        outputStream2.close();
                         Toast.makeText(getApplicationContext(),"Progression saved!",Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
+            }
         });
         load.setOnClickListener(new View.OnClickListener(){
             public void  onClick(View v){
-                weight.setText("type");
+                weight.setText("0");
                 rep.setText("0");
-                weight2.setText("type");
+                weight2.setText("0");
                 rep2.setText("0");
                 weight3.setText("0");
                 rep3.setText("0");
@@ -99,7 +81,6 @@ public class Planche extends AppCompatActivity {
                 rep4.setText("0");
                 weight5.setText("0");
                 rep5.setText("0");
-                rep6.setText("0");
                 File file = getApplicationContext().getFileStreamPath(filename);
                 if(file.exists()) {
                     FileInputStream inputStream;
@@ -114,19 +95,18 @@ public class Planche extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         inputStream.close();
-                            Scanner scanner = new Scanner(numbers).useDelimiter(" ");
-                            if(scanner.hasNext()) weight.setText(scanner.next());
-                            if(scanner.hasNext()) rep.setText(scanner.next());
-                            if(scanner.hasNext()) weight2.setText(scanner.next());
-                            if(scanner.hasNext()) rep2.setText(scanner.next());
-                            if(scanner.hasNext()) weight3.setText(scanner.next());
-                            if(scanner.hasNext()) rep3.setText(scanner.next());
-                            if(scanner.hasNext()) weight4.setText(scanner.next());
-                            if(scanner.hasNext()) rep4.setText(scanner.next());
-                            if(scanner.hasNext()) weight5.setText(scanner.next());
-                            if(scanner.hasNext()) rep5.setText(scanner.next());
-                            if(scanner.hasNext()) rep6.setText(scanner.next());
-                            numbers="";
+                        Scanner scanner = new Scanner(numbers).useDelimiter(" ");
+                        if(scanner.hasNext()) weight.setText(scanner.next());
+                        if(scanner.hasNext()) rep.setText(scanner.next());
+                        if(scanner.hasNext()) weight2.setText(scanner.next());
+                        if(scanner.hasNext()) rep2.setText(scanner.next());
+                        if(scanner.hasNext()) weight3.setText(scanner.next());
+                        if(scanner.hasNext()) rep3.setText(scanner.next());
+                        if(scanner.hasNext()) weight4.setText(scanner.next());
+                        if(scanner.hasNext()) rep4.setText(scanner.next());
+                        if(scanner.hasNext()) weight5.setText(scanner.next());
+                        if(scanner.hasNext()) rep5.setText(scanner.next());
+                        numbers="";
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -135,8 +115,8 @@ public class Planche extends AppCompatActivity {
         });
         change.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                { Intent intent = new Intent(getApplicationContext(),PowerShoulderpress.class);
+                if(!isChecked){
+                    Intent intent = new Intent(getApplicationContext(),Planche.class);
                     startActivity(intent);
                 }
             }

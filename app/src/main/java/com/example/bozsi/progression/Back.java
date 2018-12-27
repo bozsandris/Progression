@@ -1,16 +1,18 @@
 package com.example.bozsi.progression;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
@@ -39,6 +41,7 @@ public class Back extends AppCompatActivity {
         final EditText rep3 = findViewById(R.id.rep3);
         final Button save = findViewById(R.id.button);
         final Button load = findViewById(R.id.button2);
+        final Switch change = findViewById(R.id.switch2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                     try {
@@ -59,7 +62,6 @@ public class Back extends AppCompatActivity {
         });
         load.setOnClickListener(new View.OnClickListener(){
             public void  onClick(View v){
-                weight.setText("0");
                 weight.setText("0");
                 rep.setText("0");
                 weight2.setText("0");
@@ -91,6 +93,14 @@ public class Back extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
+            }
+        });
+        change.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                { Intent intent = new Intent(getApplicationContext(),PowerPullup.class);
+                    startActivity(intent);
                 }
             }
         });
