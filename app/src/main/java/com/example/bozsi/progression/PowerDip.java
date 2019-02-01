@@ -28,6 +28,7 @@ public class PowerDip extends AppCompatActivity {
     String filename = "powerdip.txt";
     String numbers = "";
     FileOutputStream outputStream;
+    Switch change;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class PowerDip extends AppCompatActivity {
         final EditText rep4 = findViewById(R.id.rep4);
         final EditText weight5 = findViewById(R.id.weight5);
         final EditText rep5 = findViewById(R.id.rep5);
-        final Switch change = findViewById(R.id.switch1);
+        change = findViewById(R.id.switch1);
         final Button save = findViewById(R.id.button);
         final Button load = findViewById(R.id.button2);
         save.setOnClickListener(new View.OnClickListener() {
@@ -121,5 +122,10 @@ public class PowerDip extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onResume(){
+        super.onResume();
+        change.setChecked(true);
     }
 }

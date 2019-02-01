@@ -26,6 +26,7 @@ public class Chest  extends AppCompatActivity {
     String filename = "chest.txt";
     String numbers = "";
     FileOutputStream outputStream;
+    Switch change;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class Chest  extends AppCompatActivity {
         final EditText rep5 = findViewById(R.id.rep5);
         final Button save = findViewById(R.id.button);
         final Button load = findViewById(R.id.button2);
-        final Switch change = findViewById(R.id.switch2);
+        change = findViewById(R.id.switch2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                     try {
@@ -119,5 +120,10 @@ public class Chest  extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onResume(){
+        super.onResume();
+        change.setChecked(false);
     }
 }

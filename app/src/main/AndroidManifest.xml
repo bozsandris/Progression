@@ -60,13 +60,16 @@
             android:parentActivityName=".MainActivity"/>
         <activity
         android:name=".PowerPullup"
-        android:label="Powertraining/Back/Pullup"/>
+        android:label="Powertraining/Back/Pullup"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".PowerDip"
-            android:label="Powertraining/Chest/Dip"/>
+            android:label="Powertraining/Chest/Dip"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".PowerShoulderpress"
-            android:label="Powertraining/Shoulder/Shoulderpress"/>
+            android:label="Powertraining/Shoulder/Shoulderpress"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

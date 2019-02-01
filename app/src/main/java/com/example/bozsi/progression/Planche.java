@@ -26,6 +26,7 @@ public class Planche extends AppCompatActivity {
     String filename = "planche.txt",filename2 = "shoulderpress.txt";
     String numbers = "",numbers2="";
     FileOutputStream outputStream,outputStream2;
+    Switch change;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class Planche extends AppCompatActivity {
         final EditText rep6 = findViewById(R.id.rep6);
         final Button save = findViewById(R.id.button);
         final Button load = findViewById(R.id.button2);
-        final Switch change = findViewById(R.id.switch2);
+        change = findViewById(R.id.switch2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 File file = new File(getApplicationContext().getFilesDir(),filename2);
@@ -141,5 +142,10 @@ public class Planche extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onResume(){
+        super.onResume();
+        change.setChecked(false);
     }
 }

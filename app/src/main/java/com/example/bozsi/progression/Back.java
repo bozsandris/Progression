@@ -26,6 +26,7 @@ public class Back extends AppCompatActivity {
     String filename = "back.txt";
     String numbers = "";
     FileOutputStream outputStream;
+    Switch change;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class Back extends AppCompatActivity {
         final EditText rep3 = findViewById(R.id.rep3);
         final Button save = findViewById(R.id.button);
         final Button load = findViewById(R.id.button2);
-        final Switch change = findViewById(R.id.switch2);
+        change = findViewById(R.id.switch2);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                     try {
@@ -104,5 +105,10 @@ public class Back extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onResume(){
+        super.onResume();
+        change.setChecked(false);
     }
 }
